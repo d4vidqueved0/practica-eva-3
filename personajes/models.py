@@ -7,6 +7,7 @@ class Imagen(models.Model):
     imagen = models.ImageField(upload_to='imagenes/')
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_subida = models.DateTimeField(auto_now_add=True)
+    Raza = models.TextField()
 
     def __str__(self):
         return self.titulo
