@@ -1,0 +1,10 @@
+:root{
+    --naranjo: #fdb232;
+    --azul : #015b97;
+}
+
+.a-button{
+    background-color: var(--naranjo);
+    color: var(--azul) !important;
+    font-weight: 600;
+}

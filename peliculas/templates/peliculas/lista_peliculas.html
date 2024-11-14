@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Peliculas{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Peliculas</h2>
+    {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'peliculas:subir_pelicula' %}" class="btn mb-3 a-button">Subir Pelicula</a>
+    {% endif %}
+    <div class="row">
+        {% for pelicula in peliculas %}
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="{{ pelicula.imagen.url }}" style="object-fit: contain; height: 200px;border-top: 1px solid;" class="card-img-top" alt="{{ pelicula.titulo }}">
+                    <div class="card-body" style="border-top: 1px solid;">
+                        <h5 class="card-title">{{ pelicula.titulo }}</h5>
+                        <a href="{% url 'peliculas:detalle_pelicula' pelicula.pk %}" class="btn a-button">Ver Detalle</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

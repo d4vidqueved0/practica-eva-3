@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ pelicula.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ pelicula.titulo }}</h2>  
+        <p><small class="text-muted">Subida por {{ pelicula.autor.username }} el {{ pelicula.fecha_subida|date:"d/m/Y H:i" }}</small></p>
+    <hr>
+<div style="display: flex; gap: 20px;">
+    <img src="{{ pelicula.imagen.url }}" style="object-fit: contain; height: 300px;" class="img-fluid mb-4" alt="{{ pelicula.titulo }}">
+    <div>
+        <h3>Sinopsis:</h3>
+        <p>{{pelicula.sinopsis}}</p>
+        <h3>Estreno:</h3>
+        <p >{{pelicula.estreno}}</p>
+        <p style= "display: inline-flex; padding: 2px 5px; border-radius: 10px; background: var(--naranjo); font-weight: 600; font-size: 12px;">{{pelicula.serie}}</p>
+    </div>
+</div>
+    {% if request.user.is_authenticated and request.user == pelicula.autor or request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'peliculas:editar_pelicula' pelicula.pk %}" class="btn btn-secondary">Editar Pelicula</a>
+        <form action="{% url 'peliculas:eliminar_pelicula' pelicula.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar Pelicula</button>
+        </form>
+    {% endif %}
+
+    <a href="{% url 'peliculas:lista_peliculas' %}" class="btn btn-link">Volver a la lista de Peliculas</a>
+</div>
+{% endblock %}
