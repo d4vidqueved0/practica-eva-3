@@ -7,16 +7,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/colores.css' %}">
 </head>
-<body>
+<body >
     <style>
-        a{
+        li  a{
             color: #fdb232 !important;
             font-weight: 600;
         }
         button{
-            background-color: #fdb232  !important;
-            color: #015b97!important;
-            border: none  !important;
             font-weight: 600 !important;
         }
     </style>
@@ -37,9 +34,8 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-auto">
-                    
                     <li class="nav-item">
-                        <img src="{% static 'images/dbz.png' %}" height="60px" width="fit-content" alt="">
+                        <img src="{% static 'images/dbz.png' %}" style="padding-right: 30px;" height="60px" width="fit-content" alt="">
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -59,7 +55,7 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'usuarios:login' %}">Iniciar Sesión</a>
+                            <a class="nav-link" href="{% url 'usuarios:login' %}" style="color: #fdb232;">Iniciar Sesión</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'usuarios:registro' %}">Registrarse</a>

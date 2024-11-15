@@ -8,6 +8,8 @@ def lista_peliculas(request):
     peliculas = Pelicula.objects.all().order_by('-fecha_subida')
     return render(request, 'peliculas/lista_peliculas.html', {'peliculas': peliculas})
 
+
+
 def detalle_pelicula(request, pk):
     pelicula = get_object_or_404(Pelicula, pk=pk)
     return render(request, 'peliculas/detalle_pelicula.html', {'pelicula': pelicula,'request':request})
@@ -54,6 +56,7 @@ def eliminar_pelicula(request, pk):
             messages.success(request, 'Pelicula eliminada exitosamente.')
             return redirect('peliculas:lista_peliculas')
         else:
+            print('Renderizando el template eliminar_pelicula.html')
             return render(request, 'peliculas/eliminar_pelicula.html', {'pelicula': pelicula})
     else:
         messages.error(request, 'No tienes permiso para eliminar esta pelicula.')

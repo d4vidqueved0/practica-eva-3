@@ -8,7 +8,7 @@ class PeliculaForm(forms.ModelForm):
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
             'sinopsis': forms.Textarea(attrs={'class': 'form-control'}),
-            'estreno' : forms.DateInput(attrs={'type': 'date'}),
+            'estreno' : forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'imagen': forms.FileInput(attrs={'class': 'form-control'}),
-
+            'serie': forms.Select(attrs={'class': 'form-control'}),
         }

@@ -9,4 +9,6 @@ urlpatterns = [
     path('subir/', views.subir_pelicula, name='subir_pelicula'),
     path('pelicula/<int:pk>/editar/', views.editar_pelicula, name='editar_pelicula'),
     path('pelicula/<int:pk>/eliminar/', views.eliminar_pelicula, name='eliminar_pelicula'),
+
+
 ]

@@ -10,7 +10,7 @@ class Pelicula(models.Model):
     )
     titulo = models.CharField(max_length=200)
     serie =models.CharField(max_length=30,choices=Series,default='Dragon Ball Z')
-    sinopsis = models.TextField()
+    sinopsis = models.TextField(max_length=1000)
     estreno = models.DateField()
     imagen = models.ImageField(upload_to='peliculas/')
 
