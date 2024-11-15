@@ -8,8 +8,10 @@
     <p><small class="text-muted">Subida por {{ imagen.autor.username }} el {{ imagen.fecha_subida|date:"d/m/Y H:i" }}</small></p>
     <hr>
     <!-- Imagen ajustada a un tamaño más pequeño -->
-    <img src="{{ imagen.imagen.url }}" class="img-fluid mb-4" alt="{{ imagen.titulo }}" style="max-width: 250px; height: auto; display: block; margin: 0 auto;">
+    <img src="{{ imagen.imagen.url }}" class="img-fluid mb-4" alt="{{ imagen.titulo }}" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+    <h3>Raza:</h3>
     <p>{{ imagen.raza }}</p>
+    <h3>Introducción: </h3>
     <p>{{ imagen.descripcion }}</p>
     {% if request.user.is_authenticated and request.user == imagen.autor or request.user.perfil.rol == 'administrador' %}
         <a href="{% url 'personajes:editar_imagen' imagen.pk %}" class="btn btn-secondary">Editar Personaje</a>

@@ -7,7 +7,7 @@
     <h2>{{ pelicula.titulo }}</h2>  
         <p><small class="text-muted">Subida por {{ pelicula.autor.username }} el {{ pelicula.fecha_subida|date:"d/m/Y H:i" }}</small></p>
     <hr>
-<div style="display: flex; gap: 20px;">
+<div style="display: grid; gap: 2%; grid-template-columns: 1fr 3fr;">
     <img src="{{ pelicula.imagen.url }}" style="object-fit: contain; height: 400px;" class="img-fluid mb-4" alt="{{ pelicula.titulo }}">
     <div>
         <h3>Sinopsis:</h3>

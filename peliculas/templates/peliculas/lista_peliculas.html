@@ -6,7 +6,7 @@
 
 <div class="container mt-4">
     <h2>Peliculas</h2>
-    <div style="display: flex; justify-content: space-between;">
+    <div>
         {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
             <a href="{% url 'peliculas:subir_pelicula' %}" class="btn mb-3 a-button">Subir Pelicula</a>
         {% endif %}
@@ -14,8 +14,8 @@
             {% for message in messages %}
             <div class="alert alert-{{ message.tags }}" style="padding: 5px 30px;">
                 {{ message }}
+            </div>
             {% endfor %}
-        </div>
         {% endif %}
 
     </div>
@@ -23,7 +23,7 @@
         {% for pelicula in peliculas %}
             <div class="col-md-4" >
                 <div class="card mb-3">
-                    <img src="{{ pelicula.imagen.url }}" style="position: absolute; height: 200px; filter: blur(2px) contrast(1); object-fit: cover; clip-path: inset(0 round 1px);" class="card-img-top" alt="{{ pelicula.titulo }}">
+                    <img src="{{ pelicula.imagen.url }}" style="position: absolute; height: 200px; filter: blur(10px) contrast(1); object-fit: cover; clip-path: inset(0 round 1px);" class="card-img-top" alt="{{ pelicula.titulo }}">
                     <img src="{{ pelicula.imagen.url }}" style="object-fit: contain; height: 200px;z-index: 20;" class="card-img-top" alt="{{ pelicula.titulo }}">
                     <div class="card-body">
                         <h5 style="height: 48px;" class="card-title">{{ pelicula.titulo }}</h5>
