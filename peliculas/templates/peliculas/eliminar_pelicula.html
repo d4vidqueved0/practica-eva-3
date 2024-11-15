@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Pelicula{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Eliminar Pelicula</h2>
+    <p>¿Estás seguro de que deseas eliminar la pelicula "{{ pelicula.titulo }}"?</p>
+    <img src="{{ pelicula.imagen.url }}" height="400px" style="padding-bottom: 10px;" alt="{{ pelicula.titulo }}">
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'peliculas:detalle_pelicula' pelicula.pk %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

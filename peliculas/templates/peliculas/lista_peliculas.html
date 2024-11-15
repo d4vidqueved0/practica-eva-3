@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Peliculas{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Peliculas</h2>
+    <div style="display: flex; justify-content: space-between;">
+        {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
+            <a href="{% url 'peliculas:subir_pelicula' %}" class="btn mb-3 a-button">Subir Pelicula</a>
+        {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="padding: 5px 30px;">
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+    <div class="row" style="background-color: #ffffffb5; padding-top: 30px; border-radius: 5px;">
+        {% for pelicula in peliculas %}
+            <div class="col-md-4" >
+                <div class="card mb-3">
+                    <img src="{{ pelicula.imagen.url }}" style="position: absolute; height: 200px; filter: blur(2px) contrast(1); object-fit: cover; clip-path: inset(0 round 1px);" class="card-img-top" alt="{{ pelicula.titulo }}">
+                    <img src="{{ pelicula.imagen.url }}" style="object-fit: contain; height: 200px;z-index: 20;" class="card-img-top" alt="{{ pelicula.titulo }}">
+                    <div class="card-body">
+                        <h5 style="height: 48px;" class="card-title">{{ pelicula.titulo }}</h5>
+                        <div style="display: flex; justify-content: space-between;">
+                            <a href="{% url 'peliculas:detalle_pelicula' pelicula.pk %}" class="btn a-button">Ver Detalle</a>
+                            {% if pelicula.serie == 'Dragon Ball Z' %}
+                                <p style= "display: inline-flex; padding: 2px 5px; border-radius: 10px; background: var(--naranjo); font-weight: 600; font-size: 12px;">{{pelicula.serie}}</p>
+                            {% endif %}
+                            {% if pelicula.serie == 'Dragon Ball Super' %}
+                            <p style= "display: inline-flex; padding: 2px 5px; border-radius: 10px; background: #409fde; font-weight: 600; font-size: 12px;">{{pelicula.serie}}</p>
+                        {% endif %}
+                        {% if pelicula.serie == 'Dragon Ball' %}
+                        <p style= "display: inline-flex; padding: 2px 5px; border-radius: 10px; background: #ef2f41; font-weight: 600; font-size: 12px;">{{pelicula.serie}}</p>
+                    {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
