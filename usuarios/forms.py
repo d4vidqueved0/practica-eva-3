@@ -7,7 +7,7 @@ class RegistroForm(forms.ModelForm):#Clase para el formulario de registro
     email =  forms.CharField(widget=forms.EmailInput (attrs={'class':'form-control'}), label="Email")
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}), label='Contraseña')
     password_confirmacion = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}), label='Confirmar Contraseña')
-    rol = forms.ChoiceField(choices=Perfil.ROLES, label='Rol')
+    rol = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}), choices=Perfil.ROLES, label='Rol')
 
     class Meta:#Clase Meta para definir el modelo y los campos del formulario
         model = User

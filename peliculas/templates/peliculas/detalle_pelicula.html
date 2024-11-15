@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ pelicula.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="background-color: #ffffffdd; padding: 10px; border-radius: 5px;">
+    <h2>{{ pelicula.titulo }}</h2>  
+        <p><small class="text-muted">Subida por {{ pelicula.autor.username }} el {{ pelicula.fecha_subida|date:"d/m/Y H:i" }}</small></p>
+    <hr>
+<div style="display: flex; gap: 20px;">
+    <img src="{{ pelicula.imagen.url }}" style="object-fit: contain; height: 400px;" class="img-fluid mb-4" alt="{{ pelicula.titulo }}">
+    <div>
+        <h3>Sinopsis:</h3>
+        <p>{{pelicula.sinopsis}}</p>
+        <h3>Estreno:</h3>
+        <p >{{pelicula.estreno}}</p>
+        {% if pelicula.serie == 'Dragon Ball Z' %}
+        <p
+            style="display: inline-flex; padding: 2px 5px; border-radius: 10px; background: var(--naranjo); font-weight: 600; font-size: 12px;">
+            {{pelicula.serie}}</p>
+        {% endif %}
+        {% if pelicula.serie == 'Dragon Ball Super' %}
+        <p
+            style="display: inline-flex; padding: 2px 5px; border-radius: 10px; background: #409fde; font-weight: 600; font-size: 12px;">
+            {{pelicula.serie}}</p>
+        {% endif %}
+        {% if pelicula.serie == 'Dragon Ball' %}
+        <p
+            style="display: inline-flex; padding: 2px 5px; border-radius: 10px; background: #ef2f41; font-weight: 600; font-size: 12px;">
+            {{pelicula.serie}}</p>
+        {% endif %}
+    </div>
+</div>
+{% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="text-align: center;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if request.user.is_authenticated and request.user == pelicula.autor or request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'peliculas:editar_pelicula' pelicula.pk %}"  style="color: white !important;" class="btn btn-warning">Editar Pelicula</a>
+        <form action="{% url 'peliculas:eliminar_pelicula' pelicula.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <a class="btn btn-danger" href="{% url 'peliculas:eliminar_pelicula' pelicula.pk  %}">Eliminar</a>
+        </form>
+    {% endif %}
+    <a href="{% url 'peliculas:lista_peliculas' %}" class="btn btn-link btn-">Volver a la lista de Peliculas</a>
+</div>
+{% endblock %}
