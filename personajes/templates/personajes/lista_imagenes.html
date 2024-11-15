@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Personajes{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Personajes</h2>
+    {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
+        <div class="text-center mb-3">
+            <a href="{% url 'personajes:subir_imagen' %}" class="btn btn-danger text-warning">Subir Personajes</a>
+        </div>
+    {% endif %}
+    <div class="row">
+        {% for imagen in imagenes %}
+            <div class="col-sm-6 col-md-6 col-lg-6 mb-3">
+                <div class="card">
+                    <!-- Imagen ajustada al tamaño máximo sin recortarse ni estirarse -->
+                    <img src="{{ imagen.imagen.url }}" class="card-img-top" alt="{{ imagen.titulo }}" style="width: 100%; height: 200px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ imagen.titulo }}</h5>
+                        <h5 class="card-title">{{ imagen.raza }}</h5>
+                        <a href="{% url 'personajes:detalle_imagen' imagen.pk %}" class="btn btn-danger text-warning">Ver Detalle</a> <!-- Botón rojo con texto amarillo -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
